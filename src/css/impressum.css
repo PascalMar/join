@@ -1,0 +1,23 @@
+.impressum {
+    position: absolute;
+    left: 295px;
+    right: 28px;
+    top: 85px;
+    padding-bottom: 30px;
+}
+
+.topic {
+    font-size: 1.8em;
+    color: rgba(11, 173, 221);
+    font-weight: 500;
+    margin-top: 50px;
+}
+
+@media (max-width: 750px) {
+
+    .impressum {
+        left: 28px;
+        right: 28px;
+        padding-bottom: 95px;
+    }
+}
