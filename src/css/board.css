@@ -172,7 +172,7 @@ body {
 }
 
 .col {
-    width: 250px;
+    width: 350px;
     height: auto;
     display: flex;
     flex-direction: column;
