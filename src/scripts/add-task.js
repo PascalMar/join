@@ -279,18 +279,20 @@ function selectCategory(category, color) {
  */
 
 async function loadContacts() {
-	let contactsSingleQuote = await getItem('contacts');
-	contacts = JSON.parse(contactsSingleQuote.replace(/'/g, '"'));
-	document.querySelector('.assigned-to__list').innerHTML = `<li onclick="assignToHandlerInList()" class="assigned-to__list-action">
-	<div class="assigned-to__in-list">
-			<span>Select contact to assign</span>
-			<img src="./src/img/img_add_task/triangle.svg">
-	</div>
-</li>`;
+    let contactsSingleQuote = await getItem('contacts');
+    contacts = JSON.parse(contactsSingleQuote.replace(/'/g, '"'));
+    let assignedToList = document.querySelector('.assigned-to__list');
+    
+    assignedToList.innerHTML = `<li onclick="assignToHandlerInList()" class="assigned-to__list-action">
+        <div class="assigned-to__in-list">
+            <span>Select contact to assign</span>
+            <img src="./src/img/img_add_task/triangle.svg">
+        </div>
+    </li>`;
 
-	for (let i = 0; i < contacts.length; i++) {
-		document.querySelector('.assigned-to__list').innerHTML += `<li class="contact"><label>${contacts[i].name}</label> <input value="${contacts[i].name}" type='checkbox' class='contact__checkbox' /></li>`;
-	}
+    for (let i = 0; i < contacts.length; i++) {
+        assignedToList.innerHTML += contactListElementsHTML(contacts, i);
+    }
 }
 
 /**
@@ -298,27 +300,28 @@ async function loadContacts() {
  * @param {number} i - The index of the checkbox.
  */
 function checkbox(i) {
-	let checkbox = document.getElementById(`checkbox${i}`);
+    let checkbox = document.getElementById(`checkbox${i}`);
+    checkbox.checked = !checkbox.checked; // toggle the checked state
 }
 
 /**
  * Handles the click event to display the list of assigned contacts.
  */
-
 function assignToHandler() {
-	document.querySelector('.assigned-to__list').style.display = 'flex';
-	document.querySelector('.assigned-to').style.display = 'none';
+    document.querySelector('.assigned-to__list').style.display = 'flex';
+    document.querySelector('.assigned-to').style.display = 'none';
 }
-
 
 /**
  * Handles the click event when selecting a contact from the assigned contacts list.
  */
-
 function assignToHandlerInList() {
-	document.querySelector('.assigned-to__list').style.display = 'none';
-	document.querySelector('.assigned-to').style.display = 'flex';
+    document.querySelector('.assigned-to__list').style.display = 'none';
+    document.querySelector('.assigned-to').style.display = 'flex';
 }
+
+
+
 
 /**
  * Adds a new subtask to the task.
